@@ -3,6 +3,7 @@ import 'package:pizza_hut/models/pizza.dart';
 
 class PizzaBloc with ChangeNotifier {
   int total = 15;
+  bool startAnim = false;
   List<Ingredient> listIngredients = [];
   List<Ingredient> deleteIngredient = [];
 
@@ -10,6 +11,7 @@ class PizzaBloc with ChangeNotifier {
     listIngredients = [];
     total = 15;
     deleteIngredient = [];
+    startAnim = false;
   }
 
   void addIngredient(Ingredient ingredient) {
@@ -42,5 +44,10 @@ class PizzaBloc with ChangeNotifier {
       }
     }
     return true;
+  }
+
+  void startAnimation() {
+    startAnim = true;
+    notifyListeners();
   }
 }

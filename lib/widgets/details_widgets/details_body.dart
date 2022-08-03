@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
+import 'package:pizza_hut/widgets/details_widgets/details_image_dish.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_price.dart';
 import 'package:pizza_hut/widgets/pizza_sized_button.dart';
 import 'package:provider/provider.dart';
 
 const _duration = Duration(milliseconds: 300);
-const _cartDuration = Duration(milliseconds: 2000);
 
 class DetailsBody extends StatefulWidget {
   const DetailsBody({Key? key, required this.pizza}) : super(key: key);
@@ -16,12 +16,8 @@ class DetailsBody extends StatefulWidget {
 }
 
 class _DetailsBodyState extends State<DetailsBody>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late AnimationController _cartController;
-  late Animation<double> _pizzaScaleSAnim, _pizzaTransAnim;
-  late Animation<double> _boxOpenSAnim, _boxCloseAnim, _boxScaleMAnim;
-  late Animation<double> _boxEndScale, _boxRotateZAnim, _boxHideAnim;
   final _isFocus = ValueNotifier(false);
   final List<Animation> _animationList = [];
   late BoxConstraints _pizzaConstraints;
@@ -32,8 +28,6 @@ class _DetailsBodyState extends State<DetailsBody>
   void initState() {
     Provider.of<PizzaBloc>(context, listen: false).setInitialList();
     _controller = AnimationController(vsync: this, duration: _duration);
-    _cartController = AnimationController(vsync: this, duration: _cartDuration);
-    _buildCartAnimation();
     super.initState();
   }
 
@@ -60,25 +54,6 @@ class _DetailsBodyState extends State<DetailsBody>
     _animationList.add(CurvedAnimation(
         parent: _controller,
         curve: const Interval(.3, 1, curve: Curves.decelerate)));
-  }
-
-  void _buildCartAnimation() {
-    _pizzaScaleSAnim = Tween(begin: 1.0, end: 0.3).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.0, .3)));
-    _pizzaTransAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.3, .5));
-    _boxOpenSAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.25, .5));
-    _boxCloseAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.45, .6));
-    _boxScaleMAnim = Tween(begin: 1.0, end: 1.3).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.6, .7)));
-    _boxRotateZAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.8, .9));
-    _boxEndScale = Tween(begin: 1.0, end: .2).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.75, 1.0)));
-    _boxHideAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.75, 1.0));
   }
 
   @override
@@ -121,7 +96,8 @@ class _DetailsBodyState extends State<DetailsBody>
                               width: focused
                                   ? constrain.maxWidth * pizzaSize.factor - 20
                                   : constrain.maxWidth * pizzaSize.factor - 30,
-                              child: _pizzaImageAndDish(),
+                              child: DetailsImageDish(
+                                  pizza: widget.pizza, isTrue: false),
                             );
                           },
                         ),
@@ -137,32 +113,6 @@ class _DetailsBodyState extends State<DetailsBody>
       ),
     );
   }
-
-  Widget _pizzaImageAndDish() => Hero(
-        tag: widget.pizza.image + widget.pizza.name,
-        child: Stack(
-          children: [
-            DecoratedBox(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 15,
-                    spreadRadius: 3,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: Image.asset('assets/images/dish.png'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image.asset(widget.pizza.image),
-            ),
-          ],
-        ),
-      );
 
   Widget _pizzaSize() => ValueListenableBuilder(
         valueListenable: _notifierPizzaSize,
