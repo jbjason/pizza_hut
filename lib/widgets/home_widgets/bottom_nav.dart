@@ -60,13 +60,8 @@ class _BottomNavState extends State<BottomNav>
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           color: scaffoldColor,
-          gradient: LinearGradient(colors: [
-            const Color.fromARGB(255, 82, 87, 126),
-            const Color.fromARGB(255, 82, 87, 126).withOpacity(0.6),
-            const Color.fromARGB(255, 82, 87, 126).withOpacity(0.3),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
           borderRadius: BorderRadius.vertical(
-              top: Radius.circular(lerpDouble(50, 0, _controller.value)!)),
+              top: Radius.circular(lerpDouble(40, 0, _controller.value)!)),
         ),
         child: Stack(
           children: [
@@ -107,11 +102,6 @@ class _BottomNavState extends State<BottomNav>
                 width: _imageSize,
                 height: _imageSize,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.horizontal(
-                    right:
-                        Radius.circular(lerpDouble(20, 0, _controller.value)!),
-                    left: const Radius.circular(20),
-                  ),
                   image: DecorationImage(
                       image: AssetImage(pizza.image), fit: BoxFit.cover),
                 ),
