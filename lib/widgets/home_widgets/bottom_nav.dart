@@ -3,6 +3,7 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'dart:ui';
 import 'package:pizza_hut/models/pizza.dart';
+import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/home_widgets/cart_item_details.dart';
 
 const _minSize = 60.0;
@@ -71,8 +72,7 @@ class _BottomNavState extends State<BottomNav>
               right: 10,
               child: Row(
                 children: [
-                  const Icon(Icons.shopping_cart_outlined,
-                      color: AppColors.iconDark),
+                  const CounterCartButton(),
                   const SizedBox(width: 5),
                   Text(
                     'Pizza Cart',

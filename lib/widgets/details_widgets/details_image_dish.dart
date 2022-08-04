@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:pizza_hut/models/pizza.dart';
+import 'package:pizza_hut/provider/cart.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -63,9 +64,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<PizzaBloc>(context).startAnim == false
-        ? null
-        : _cartController.forward(from: 0.0);
+    _addToCart();
     return AnimatedBuilder(
       animation: _cartController,
       builder: (context, _) {
@@ -163,4 +162,14 @@ class _DetailsImageDishState extends State<DetailsImageDish>
   }
 
   double _degreeConvert(double deg) => (deg * math.pi) / 180;
+
+  void _addToCart() async {
+    final provider = Provider.of<PizzaBloc>(context);
+    if (provider.startAnim == true) {
+      await _cartController.forward(from: 0.0);
+      if (mounted) {
+        Provider.of<Cart>(context, listen: false).addItem(widget.pizza);
+      }
+    }
+  }
 }

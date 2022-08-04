@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:pizza_hut/widgets/pizza_cart_button.dart';
+import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 
 class PizzaTesting extends StatefulWidget {
   const PizzaTesting({Key? key}) : super(key: key);

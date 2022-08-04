@@ -4,7 +4,7 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/screens/details_screen.dart';
-import 'package:pizza_hut/widgets/pizza_sized_button.dart';
+import 'package:pizza_hut/widgets/common_widgets/pizza_sized_button.dart';
 
 class HomePizzaDetails extends StatelessWidget {
   const HomePizzaDetails(

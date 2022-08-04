@@ -4,9 +4,10 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
+import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_body.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_ingredients.dart';
-import 'package:pizza_hut/widgets/pizza_cart_button.dart';
+import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -51,25 +52,24 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
-  AppBar _appBar(BuildContext context) => AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          pizza.name,
-          style: GoogleFonts.benne(
-              textStyle:
-                  const TextStyle(color: AppColors.textDark, fontSize: 24)),
-        ),
-        leading: IconButton(
-            onPressed: () => Navigator.maybePop(context),
-            icon: const Icon(Icons.arrow_back_ios_new,
-                color: AppColors.iconDark)),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined,
-                color: AppColors.iconDark),
-          )
-        ],
-      );
+  AppBar _appBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      title: Text(
+        pizza.name,
+        style: GoogleFonts.benne(
+            textStyle:
+                const TextStyle(color: AppColors.textDark, fontSize: 24)),
+      ),
+      leading: IconButton(
+          onPressed: () => Navigator.maybePop(context),
+          icon:
+              const Icon(Icons.arrow_back_ios_new, color: AppColors.iconDark)),
+      actions: const [
+        Center(child: CounterCartButton()),
+        SizedBox(width: 20),
+      ],
+    );
+  }
 }

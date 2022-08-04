@@ -3,7 +3,7 @@ import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_image_dish.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_price.dart';
-import 'package:pizza_hut/widgets/pizza_sized_button.dart';
+import 'package:pizza_hut/widgets/common_widgets/pizza_sized_button.dart';
 import 'package:provider/provider.dart';
 
 const _duration = Duration(milliseconds: 300);

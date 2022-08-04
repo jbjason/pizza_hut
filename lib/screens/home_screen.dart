@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/widgets/home_widgets/bottom_nav.dart';
 import 'package:pizza_hut/widgets/home_widgets/home_appbar.dart';
 import 'package:pizza_hut/widgets/home_widgets/home_pizza_pageview.dart';
-import 'package:pizza_hut/widgets/pizza_cart_button.dart';
+import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

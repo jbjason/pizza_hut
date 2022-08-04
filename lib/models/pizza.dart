@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class Pizza {
-  final String name, date;
+  final String name, date, id;
   final double price;
   final String image;
 
   Pizza(
       {required this.name,
+      required this.id,
       required this.date,
       required this.price,
       required this.image});
@@ -41,46 +42,55 @@ class PizzaSizeState {
 
 final List<Pizza> pizzaList = [
   Pizza(
+      id: '12345Jb',
       name: 'Neapolitan Pizza',
       date: '8.12.2021',
       price: 8.12,
       image: 'assets/images/pizza-8.png'),
   Pizza(
+      id: '15234Jb',
       name: 'Chicago Pizza',
       date: '8.12.2021',
       price: 6.25,
       image: 'assets/images/pizza-1.png'),
   Pizza(
+      id: '152454Jb',
       name: 'New York-Style Pizza',
       date: '8.12.2021',
       price: 13.0,
       image: 'assets/images/pizza-2.png'),
   Pizza(
+      id: '342454Jb',
       name: 'Sicilian Pizza',
       date: '8.12.2021',
       price: 15.4,
       image: 'assets/images/pizza-3.png'),
   Pizza(
+      id: '152B54J',
       name: 'St. Louis Pizza',
       price: 12.42,
       date: '8.12.2021',
       image: 'assets/images/pizza-4.png'),
   Pizza(
+      id: '1op2454Jb',
       name: 'Detroit Pizza',
       date: '8.12.2021',
       price: 10.75,
       image: 'assets/images/pizza-5.png'),
   Pizza(
+      id: 'sh152454Jb',
       name: 'California Pizza',
       date: '8.12.2021',
       price: 5.50,
       image: 'assets/images/pizza-6.png'),
   Pizza(
+      id: 'HT2454Jb',
       name: 'Detroit Pizza2',
       date: '8.12.2021',
       price: 4.87,
       image: 'assets/images/pizza-9.png'),
   Pizza(
+      id: '1BX454Jb',
       name: 'Neapolitan Pizza2',
       date: '8.12.2021',
       price: 10.78,
