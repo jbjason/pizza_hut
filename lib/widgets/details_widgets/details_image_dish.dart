@@ -78,19 +78,22 @@ class _DetailsImageDishState extends State<DetailsImageDish>
               Center(
                 child: Opacity(
                   opacity: 1 - _pizzaTransAnim.value,
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 15,
-                          spreadRadius: 3,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
+                  child: Transform.scale(
+                    scale: _pizzaScaleSAnim.value,
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 15,
+                            spreadRadius: 3,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Image.asset('assets/images/dish.png'),
                     ),
-                    child: Image.asset('assets/images/dish.png'),
                   ),
                 ),
               ),

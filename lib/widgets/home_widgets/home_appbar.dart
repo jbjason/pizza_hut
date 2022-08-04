@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 
@@ -8,16 +9,18 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Order Manually',
-            style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textDark),
+            style: GoogleFonts.benne(
+              textStyle: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textDark),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

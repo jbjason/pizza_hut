@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
@@ -55,7 +56,9 @@ class DetailsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           pizza.name,
-          style: const TextStyle(color: AppColors.textDark, fontSize: 24),
+          style: GoogleFonts.benne(
+              textStyle:
+                  const TextStyle(color: AppColors.textDark, fontSize: 24)),
         ),
         leading: IconButton(
             onPressed: () => Navigator.maybePop(context),

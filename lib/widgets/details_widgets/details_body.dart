@@ -155,7 +155,7 @@ class _DetailsBodyState extends State<DetailsBody>
   Widget _buiildIngredientAndDelete() {
     final provider = Provider.of<PizzaBloc>(context);
     final delIngre = provider.deleteIngredient;
-    final opacity = provider.startAnim ? 1.0 : 0.0;
+    final opacity = provider.startAnim ? 0.0 : 1.0;
     if (delIngre.isNotEmpty) {
       _refresh(delIngre[0]);
     }

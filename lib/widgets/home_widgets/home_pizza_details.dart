@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
@@ -50,9 +51,13 @@ class HomePizzaDetails extends StatelessWidget {
         opacity: 1 - scale,
         child: Column(
           children: [
-            Text(pizza.name,
-                style:
-                    const TextStyle(color: AppColors.textDark, fontSize: 24)),
+            Text(
+              pizza.name,
+              style: GoogleFonts.benne(
+                textStyle:
+                    const TextStyle(color: AppColors.textDark, fontSize: 24),
+              ),
+            ),
             const Text('★★★★★', style: TextStyle(color: textColor)),
             const SizedBox(height: 5),
             Text(
