@@ -97,7 +97,10 @@ class _DetailsBodyState extends State<DetailsBody>
                                   ? constrain.maxWidth * pizzaSize.factor - 20
                                   : constrain.maxWidth * pizzaSize.factor - 30,
                               child: DetailsImageDish(
-                                  pizza: widget.pizza, isTrue: false),
+                                  height: constrain.maxHeight,
+                                  width: constrain.maxWidth,
+                                  pizza: widget.pizza,
+                                  isTrue: false),
                             );
                           },
                         ),
@@ -150,15 +153,21 @@ class _DetailsBodyState extends State<DetailsBody>
       );
 
   Widget _buiildIngredientAndDelete() {
-    final delIngre = Provider.of<PizzaBloc>(context).deleteIngredient;
+    final provider = Provider.of<PizzaBloc>(context);
+    final delIngre = provider.deleteIngredient;
+    final opacity = provider.startAnim ? 1.0 : 0.0;
     if (delIngre.isNotEmpty) {
       _refresh(delIngre[0]);
     }
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) {
-        return _buildIngredientsWidget(delIngre);
-      },
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 300),
+      opacity: opacity,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return _buildIngredientsWidget(delIngre);
+        },
+      ),
     );
   }
 

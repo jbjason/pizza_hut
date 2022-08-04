@@ -8,10 +8,16 @@ import 'package:provider/provider.dart';
 const _cartDuration = Duration(milliseconds: 2000);
 
 class DetailsImageDish extends StatefulWidget {
-  const DetailsImageDish({Key? key, required this.pizza, required this.isTrue})
+  const DetailsImageDish(
+      {Key? key,
+      required this.height,
+      required this.width,
+      required this.pizza,
+      required this.isTrue})
       : super(key: key);
   final Pizza pizza;
   final bool isTrue;
+  final double height, width;
   @override
   State<DetailsImageDish> createState() => _DetailsImageDishState();
 }
@@ -57,7 +63,6 @@ class _DetailsImageDishState extends State<DetailsImageDish>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     Provider.of<PizzaBloc>(context).startAnim == false
         ? null
         : _cartController.forward(from: 0.0);
@@ -69,7 +74,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
           tag: widget.pizza.image + widget.pizza.name,
           child: Stack(
             children: [
-              _boxBody(boxCloseVal, size),
+              _boxBody(boxCloseVal),
               Center(
                 child: Opacity(
                   opacity: 1 - _pizzaTransAnim.value,
@@ -111,10 +116,10 @@ class _DetailsImageDishState extends State<DetailsImageDish>
     );
   }
 
-  Widget _boxBody(double boxCloseVal, Size size) {
+  Widget _boxBody(double boxCloseVal) {
     // here center=(0,0)  topRightCorner=(size.width / 2,-size.height / 2)
-    final x = lerpDouble(0, size.width / 2, _boxHideAnim.value)!;
-    final y = lerpDouble(0, -size.height / 2, _boxHideAnim.value)!;
+    final x = lerpDouble(0, widget.width / 2, _boxHideAnim.value)!;
+    final y = lerpDouble(0, -widget.height / 2, _boxHideAnim.value)!;
     return Opacity(
       opacity: 1 - _boxHideAnim.value,
       child: Transform(
