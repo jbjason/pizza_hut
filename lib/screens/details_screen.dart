@@ -4,6 +4,7 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
+import 'package:pizza_hut/screens/home_screen.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_body.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_ingredients.dart';
@@ -63,7 +64,11 @@ class DetailsScreen extends StatelessWidget {
                 const TextStyle(color: AppColors.textDark, fontSize: 24)),
       ),
       leading: IconButton(
-          onPressed: () => Navigator.maybePop(context),
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => const HomeScreen()),
+                (_) => false);
+          },
           icon:
               const Icon(Icons.arrow_back_ios_new, color: AppColors.iconDark)),
       actions: const [

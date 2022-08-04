@@ -20,7 +20,7 @@ class CartItems extends StatelessWidget {
             children: [
               for (CartItem item in cartItems)
                 Container(
-                  width: MediaQuery.of(context).size.width * .95,
+                  width: MediaQuery.of(context).size.width,
                   height: imageMaxSize,
                   margin: const EdgeInsets.only(bottom: 20),
                   decoration:
@@ -42,7 +42,7 @@ class CartItems extends StatelessWidget {
             ],
           ),
         )),
-        Container(height: 100, color: Colors.amber),
+        //  Container(height: 100, color: Colors.amber),
       ],
     );
   }

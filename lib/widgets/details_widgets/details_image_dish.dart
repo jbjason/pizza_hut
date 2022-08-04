@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/cart.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
+import 'package:pizza_hut/screens/details_screen.dart';
 import 'package:provider/provider.dart';
 
 const _cartDuration = Duration(milliseconds: 2000);
@@ -169,6 +170,10 @@ class _DetailsImageDishState extends State<DetailsImageDish>
       await _cartController.forward(from: 0.0);
       if (mounted) {
         Provider.of<Cart>(context, listen: false).addItem(widget.pizza);
+        Future.delayed(const Duration(milliseconds: 500)).then((_) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => DetailsScreen(pizza: widget.pizza)));
+        });
       }
     }
   }

@@ -14,7 +14,6 @@ class CartItemDetails extends StatelessWidget {
       builder: (context, double val, _) => Opacity(
         opacity: val,
         child: Container(
-          margin: const EdgeInsets.only(right: 8),
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -26,6 +25,7 @@ class CartItemDetails extends StatelessWidget {
               Center(
                 child: Text(
                   pizza.name,
+                  overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.kaushanScript(
                     textStyle: const TextStyle(
                       fontSize: 20,
