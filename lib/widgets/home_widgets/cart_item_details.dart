@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_hut/models/pizza.dart';
+import 'package:pizza_hut/constants/theme.dart';
+import 'package:pizza_hut/provider/cart.dart';
 
 class CartItemDetails extends StatelessWidget {
   const CartItemDetails({Key? key, required this.pizza}) : super(key: key);
-  final Pizza pizza;
+  final CartItem pizza;
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
@@ -23,22 +24,22 @@ class CartItemDetails extends StatelessWidget {
               Text(pizza.name, style: const TextStyle(fontSize: 16)),
               const SizedBox(height: 8),
               Row(
-                children: <Widget>[
+                children: [
                   Text(
-                    '1 ticket',
-                    style: TextStyle(
+                    'Price: ${pizza.price}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: AppColors.textDark,
                     ),
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    pizza.date,
+                    'Quantity: ${pizza.quantity}',
                     style: const TextStyle(
                       fontWeight: FontWeight.w300,
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: AppColors.textDark,
                     ),
                   ),
                 ],

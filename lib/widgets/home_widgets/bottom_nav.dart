@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'dart:ui';
-import 'package:pizza_hut/models/pizza.dart';
+import 'package:pizza_hut/provider/cart.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/home_widgets/cart_item_details.dart';
+import 'package:provider/provider.dart';
 
 const _minSize = 60.0;
 const _duration = Duration(milliseconds: 800);
@@ -36,14 +37,14 @@ class _BottomNavState extends State<BottomNav>
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context);
+    final height = MediaQuery.of(context).size.height;
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) => Positioned(
         bottom: 0,
         left: 0,
         right: 0,
-        height: lerpDouble(_minSize, media.size.height, _controller.value),
+        height: lerpDouble(_minSize, height, _controller.value),
         child: GestureDetector(
           onTap: () {
             _controller.isDismissed
@@ -57,39 +58,42 @@ class _BottomNavState extends State<BottomNav>
     );
   }
 
-  Widget _body() => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-          color: scaffoldColor,
-          borderRadius: BorderRadius.vertical(
-              top: Radius.circular(lerpDouble(40, 0, _controller.value)!)),
-        ),
-        child: Stack(
-          children: [
-            for (int i = 0; i < 3; i++) _cartItem(pizzaList[i], i),
-            Positioned(
-              top: _cartText,
-              right: 10,
-              child: Row(
-                children: [
-                  const CounterCartButton(),
-                  const SizedBox(width: 5),
-                  Text(
-                    'Pizza Cart',
-                    style: TextStyle(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w800,
-                      fontSize: lerpDouble(16, 28, _controller.value),
-                    ),
+  Widget _body() {
+    final cartItems = Provider.of<Cart>(context).items;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: scaffoldColor,
+        borderRadius: BorderRadius.vertical(
+            top: Radius.circular(lerpDouble(40, 0, _controller.value)!)),
+      ),
+      child: Stack(
+        children: [
+          for (int i = 0; i < cartItems.length; i++) _cartItem(cartItems[i], i),
+          Positioned(
+            top: _cartText,
+            right: 10,
+            child: Row(
+              children: [
+                const CounterCartButton(),
+                const SizedBox(width: 5),
+                Text(
+                  'Pizza Cart',
+                  style: TextStyle(
+                    color: AppColors.textDark,
+                    fontWeight: FontWeight.w800,
+                    fontSize: lerpDouble(16, 28, _controller.value),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
+  }
 
-  Widget _cartItem(Pizza pizza, int index) => Positioned(
+  Widget _cartItem(CartItem pizza, int index) => Positioned(
         top: _imageTopPadding(index),
         left: _imageLeftPadding(index),
         child: Container(

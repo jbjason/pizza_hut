@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:pizza_hut/models/pizza.dart';
 
 class CartItem {
-  final String id, title, image;
+  final String id, name, image;
   int quantity;
   final double price;
   CartItem({
     required this.id,
-    required this.title,
+    required this.name,
     required this.quantity,
     required this.price,
     required this.image,
@@ -38,7 +38,7 @@ class Cart with ChangeNotifier {
     _items.add(
       CartItem(
         id: pizza.id,
-        title: pizza.name,
+        name: pizza.name,
         image: pizza.image,
         price: pizza.price,
         quantity: 1,
