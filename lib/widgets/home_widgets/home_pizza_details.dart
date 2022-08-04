@@ -12,10 +12,11 @@ class HomePizzaDetails extends StatelessWidget {
       required this.pizza,
       required this.translateX,
       required this.translateY,
+      required this.opacity,
       required this.scale})
       : super(key: key);
   final Pizza pizza;
-  final double translateX, translateY, scale;
+  final double translateX, translateY, scale, opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class HomePizzaDetails extends StatelessWidget {
   }
 
   Widget _titlePriceRate() => Opacity(
-        opacity: 1 - scale,
+        opacity: 1 - opacity,
         child: Column(
           children: [
             Text(
@@ -62,10 +63,12 @@ class HomePizzaDetails extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               '\$ ${pizza.price}',
-              style: const TextStyle(
-                  color: AppColors.textDark,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800),
+              style: GoogleFonts.kaushanScript(
+                textStyle: const TextStyle(
+                    color: AppColors.textDark,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800),
+              ),
             ),
             const SizedBox(height: 10),
             Row(

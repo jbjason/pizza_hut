@@ -56,7 +56,7 @@ class _HomeBodyState extends State<HomeBody> {
 
           if (_controller.position.haveDimensions) {
             _scale = percent.clamp(-.5, .5).abs();
-            final translate = percent.clamp(-1.0, 2.0);
+            final translate = percent.clamp(-1.0, 1.0);
             // for left PizzaItem
             if (translate < 0) {
               _translateX = 100 * translate.abs();
@@ -76,6 +76,7 @@ class _HomeBodyState extends State<HomeBody> {
             translateX: _translateX,
             translateY: _translateY,
             scale: _scale,
+            opacity: _rotate,
           );
         },
       );

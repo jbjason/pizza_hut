@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,9 @@ class DetailsPrice extends StatelessWidget {
       child: Text(
         '\$$total',
         key: UniqueKey(),
-        style: const TextStyle(fontSize: 30, color: Colors.brown),
+        style: GoogleFonts.kaushanScript(
+          textStyle: const TextStyle(fontSize: 30, color: Colors.brown),
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/provider/cart.dart';
 
@@ -16,31 +17,35 @@ class CartItemDetails extends StatelessWidget {
           margin: const EdgeInsets.only(right: 8),
           padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius:
-                  BorderRadius.horizontal(right: Radius.circular(30))),
+            color: Colors.white,
+            borderRadius: BorderRadius.horizontal(right: Radius.circular(30)),
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(pizza.name, style: const TextStyle(fontSize: 16)),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Text(
-                    'Price: ${pizza.price}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
+              Center(
+                child: Text(
+                  pizza.name,
+                  style: GoogleFonts.kaushanScript(
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                       color: AppColors.textDark,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
                   Text(
-                    'Quantity: ${pizza.quantity}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 12,
-                      color: AppColors.textDark,
-                    ),
+                    'PRICE:  ${pizza.price}',
+                    style: const TextStyle(color: AppColors.textDark),
+                  ),
+                  Text(
+                    'Quantity:  ${pizza.quantity}',
+                    style: const TextStyle(color: AppColors.textDark),
                   ),
                 ],
               ),
@@ -49,9 +54,9 @@ class CartItemDetails extends StatelessWidget {
                 children: [
                   Icon(Icons.place, color: Colors.grey.shade400, size: 16),
                   Text(
-                    'Science Park 10 25A',
+                    'Science Park 25A',
                     style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
-                  )
+                  ),
                 ],
               )
             ],
