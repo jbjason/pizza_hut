@@ -17,7 +17,7 @@ class _HomeBodyState extends State<HomeBody> {
 
   @override
   void initState() {
-    _controller = PageController(viewportFraction: .7, initialPage: 0);
+    _controller = PageController(viewportFraction: .7);
     _controller.addListener(_listener);
     super.initState();
   }

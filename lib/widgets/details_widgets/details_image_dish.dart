@@ -57,7 +57,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
         parent: _cartController, curve: const Interval(0.6, .7)));
     _boxRotateZAnim = CurvedAnimation(
         parent: _cartController, curve: const Interval(0.8, .9));
-    _boxEndScale = Tween(begin: 1.0, end: .2).animate(CurvedAnimation(
+    _boxEndScale = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
         parent: _cartController, curve: const Interval(0.75, 1.0)));
     _boxHideAnim = CurvedAnimation(
         parent: _cartController, curve: const Interval(0.75, 1.0));
@@ -138,8 +138,11 @@ class _DetailsImageDishState extends State<DetailsImageDish>
                 'assets/images/box_inside.png', _degreeConvert(-45.0)),
             _boxImageAndAnimation(
                 'assets/images/box_inside.png', _degreeConvert(boxCloseVal)),
-            _boxImageAndAnimation(
-                'assets/images/box_front.png', _degreeConvert(boxCloseVal)),
+            // box Front Image
+            _boxCloseAnim.value > .5
+                ? _boxImageAndAnimation(
+                    'assets/images/box_front.png', _degreeConvert(boxCloseVal))
+                : const SizedBox.shrink(),
           ],
         ),
       ),

@@ -15,33 +15,35 @@ class CartItems extends StatelessWidget {
       children: [
         const SizedBox(height: 100),
         Expanded(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              for (CartItem item in cartItems)
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: imageMaxSize,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: imageMaxSize,
-                        height: imageMaxSize,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(item.image), fit: BoxFit.cover),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                for (CartItem item in cartItems)
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: imageMaxSize,
+                    margin: const EdgeInsets.only(bottom: 20),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: imageMaxSize,
+                          height: imageMaxSize,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(item.image),
+                                fit: BoxFit.cover),
+                          ),
                         ),
-                      ),
-                      Expanded(child: CartItemDetails(pizza: item))
-                    ],
+                        Expanded(child: CartItemDetails(pizza: item))
+                      ],
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
-        )),
+        ),
         //  Container(height: 100, color: Colors.amber),
       ],
     );

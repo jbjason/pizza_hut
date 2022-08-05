@@ -66,17 +66,21 @@ class _CartScreenState extends State<CartScreen>
         color: scaffoldColor,
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(lerpDouble(40, 0, _controller.value)!)),
+        image: const DecorationImage(
+            image: AssetImage('assets/images/cover-3.png')),
       ),
       child: Stack(
         children: [
+          Positioned.fill(child: Image.asset('assets/images/cover-2.png')),
           // showing cartItems moving animation with Stack
           for (int i = 0; i < cartItems.length; i++) _cartItem(cartItems[i], i),
           // cart Item & icon Text
           Positioned(
-            top: _cartText,
-            right: 10,
+            top: _cartTextTopPadding,
+            right: 0,
             child: Container(
-              color: scaffoldColor,
+              padding: const EdgeInsets.all(10),
+              color: Colors.white24,
               child: Row(
                 children: [
                   const CounterCartButton(),
@@ -124,7 +128,7 @@ class _CartScreenState extends State<CartScreen>
         ),
       );
 
-  double get _cartText => lerpDouble(18, 50, _controller.value)!;
+  double get _cartTextTopPadding => lerpDouble(7, 50, _controller.value)!;
 
   double get _cartItemContainer => lerpDouble(_imageSmallSize,
       MediaQuery.of(context).size.width * .95, _controller.value)!;
