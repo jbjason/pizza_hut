@@ -42,18 +42,22 @@ class PizzaIngredientItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Draggable(
-        feedback: _buildChild(),
+        feedback: _buildChild(context),
         data: ingredient,
         childWhenDragging: _childWhileDragging(),
-        child: _buildChild(),
+        child: _buildChild(context),
       ),
     );
   }
 
   // here exist will work in reverse mode
-  Widget _buildChild() {
+  Widget _buildChild(BuildContext context) {
+    final bloc = Provider.of<PizzaBloc>(context, listen: false);
     return GestureDetector(
-      onTap: !exist ? onTap : null,
+      // to remove if exist
+      onTap: exist ? null : onTap,
+      // to add if not exit
+      onDoubleTap: () => exist ? null : bloc.addIngredient(ingredient),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 7),
         child: Container(

@@ -57,8 +57,8 @@ class _DetailsImageDishState extends State<DetailsImageDish>
         parent: _cartController, curve: const Interval(0.6, .7)));
     _boxRotateZAnim = CurvedAnimation(
         parent: _cartController, curve: const Interval(0.8, .9));
-    _boxEndScale = Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.75, 1.0)));
+    _boxEndScale = CurvedAnimation(
+        parent: _cartController, curve: const Interval(0.75, 1.0));
     _boxHideAnim = CurvedAnimation(
         parent: _cartController, curve: const Interval(0.75, 1.0));
   }
@@ -129,7 +129,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
         alignment: Alignment.center,
         transform: Matrix4.identity()
           ..translate(x, y)
-          ..scale(_boxEndScale.value)
+          ..scale(1 - _boxEndScale.value)
           ..rotateZ(_boxRotateZAnim.value)
           ..scale(_boxScaleMAnim.value),
         child: Stack(

@@ -242,6 +242,7 @@ class _DetailsBodyState extends State<DetailsBody>
 
   bool _onWillAccept(Ingredient ingredient) {
     _isFocus.value = true;
+    // if true then accept , if falese then rejects
     return Provider.of<PizzaBloc>(context, listen: false)
         .containsIngredient(ingredient);
   }
