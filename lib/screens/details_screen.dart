@@ -4,6 +4,7 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
+import 'package:pizza_hut/screens/home_screen.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_body.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_ingredients.dart';
@@ -11,8 +12,9 @@ import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key, required this.pizza}) : super(key: key);
-
+  const DetailsScreen({Key? key, required this.isAnimate, required this.pizza})
+      : super(key: key);
+  final bool isAnimate;
   final Pizza pizza;
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,12 @@ class DetailsScreen extends StatelessWidget {
       ),
       leading: IconButton(
           onPressed: () {
-            Navigator.maybePop(context);
+            isAnimate
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    (route) => false)
+                : Navigator.maybePop(context);
           },
           icon:
               const Icon(Icons.arrow_back_ios_new, color: AppColors.iconDark)),

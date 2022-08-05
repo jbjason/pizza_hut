@@ -175,7 +175,8 @@ class _DetailsImageDishState extends State<DetailsImageDish>
         Provider.of<Cart>(context, listen: false).addItem(widget.pizza);
         Future.delayed(const Duration(milliseconds: 500)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => DetailsScreen(pizza: widget.pizza)));
+              builder: (_) =>
+                  DetailsScreen(pizza: widget.pizza, isAnimate: true)));
         });
       }
     }
