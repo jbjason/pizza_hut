@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_image_dish.dart';
+import 'package:pizza_hut/widgets/details_widgets/details_ingredients.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_price.dart';
 import 'package:pizza_hut/widgets/common_widgets/pizza_sized_button.dart';
 import 'package:provider/provider.dart';
@@ -60,14 +61,21 @@ class _DetailsBodyState extends State<DetailsBody>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // draggable Ingredients
-        _dragTargetImage(),
-        const SizedBox(height: 5),
-        // Price
-        const DetailsPrice(),
-        const SizedBox(height: 10),
-        // Pizza Size
-        _pizzaSize(),
+        Expanded(
+            flex: 6,
+            child: Column(
+              children: [
+                // draggable Ingredients
+                _dragTargetImage(),
+                const SizedBox(height: 5),
+                // Price
+                const DetailsPrice(),
+                const SizedBox(height: 10),
+                // Pizza Size
+                _pizzaSize(),
+              ],
+            )),
+        Expanded(flex: 3, child: DetailsIngredients(addIngred: _onAccept)),
       ],
     );
   }
@@ -244,7 +252,7 @@ class _DetailsBodyState extends State<DetailsBody>
     _isFocus.value = true;
     // if true then accept , if falese then rejects
     return Provider.of<PizzaBloc>(context, listen: false)
-        .containsIngredient(ingredient);
+        .isIngredientContains(ingredient);
   }
 
   Future<void> _refresh(Ingredient ingredient) async {

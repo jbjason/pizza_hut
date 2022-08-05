@@ -35,9 +35,10 @@ class PizzaBloc with ChangeNotifier {
     notifyListeners();
   }
 
-  bool containsIngredient(Ingredient ingredient) {
+  bool isIngredientContains(Ingredient ingredient) {
     // this loop works for onWillAccept*(dragTargetion)
-    // reverse condition for PizzaIngredientsScreen
+    // reverse condition for detailsDientsScreen
+    if (listIngredients.isEmpty) return true;
     for (Ingredient i in listIngredients) {
       if (i.image == ingredient.image) {
         return false;

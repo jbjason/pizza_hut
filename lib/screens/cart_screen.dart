@@ -71,7 +71,6 @@ class _CartScreenState extends State<CartScreen>
       ),
       child: Stack(
         children: [
-          Positioned.fill(child: Image.asset('assets/images/cover-2.png')),
           // showing cartItems moving animation with Stack
           for (int i = 0; i < cartItems.length; i++) _cartItem(cartItems[i], i),
           // cart Item & icon Text

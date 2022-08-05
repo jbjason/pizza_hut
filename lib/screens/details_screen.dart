@@ -7,7 +7,6 @@ import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:pizza_hut/screens/home_screen.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_body.dart';
-import 'package:pizza_hut/widgets/details_widgets/details_ingredients.dart';
 import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +19,7 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return WillPopScope(
-      onWillPop: () async {
-        _backButton(context);
-        return false;
-      },
+      onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: scaffoldColor,
         appBar: _appBar(context),
@@ -34,16 +30,10 @@ class DetailsScreen extends StatelessWidget {
               left: 10,
               right: 10,
               child: Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  children: [
-                    Expanded(flex: 6, child: DetailsBody(pizza: pizza)),
-                    const Expanded(flex: 3, child: DetailsIngredients()),
-                  ],
-                ),
-              ),
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  child: DetailsBody(pizza: pizza)),
             ),
             Positioned(
               bottom: 25,
@@ -71,7 +61,14 @@ class DetailsScreen extends StatelessWidget {
                 const TextStyle(color: AppColors.textDark, fontSize: 24)),
       ),
       leading: IconButton(
-          onPressed: () => _backButton(context),
+          onPressed: () {
+            isAnimate
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    (route) => false)
+                : Navigator.pop(context);
+          },
           icon:
               const Icon(Icons.arrow_back_ios_new, color: AppColors.iconDark)),
       actions: const [
@@ -79,14 +76,5 @@ class DetailsScreen extends StatelessWidget {
         SizedBox(width: 20),
       ],
     );
-  }
-
-  void _backButton(BuildContext context) {
-    isAnimate
-        ? Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => const HomeScreen()),
-            (route) => false)
-        : Navigator.maybePop(context);
   }
 }

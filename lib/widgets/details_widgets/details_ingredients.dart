@@ -4,8 +4,9 @@ import 'package:pizza_hut/provider/pizza_bloc.dart';
 import 'package:provider/provider.dart';
 
 class DetailsIngredients extends StatelessWidget {
-  const DetailsIngredients({Key? key}) : super(key: key);
-
+  const DetailsIngredients({Key? key, required this.addIngred})
+      : super(key: key);
+  final Function(Ingredient ingred) addIngred;
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<PizzaBloc>(context);
@@ -18,8 +19,9 @@ class DetailsIngredients extends StatelessWidget {
           final ingredient = ingredients[index];
           return PizzaIngredientItem(
             ingredient: ingredient,
-            exist: bloc.containsIngredient(ingredient),
-            onTap: () => bloc.removeIngredient(ingredient),
+            addIngred: addIngred,
+            exist: bloc.isIngredientContains(ingredient),
+            removeIngredient: () => bloc.removeIngredient(ingredient),
           );
         },
       ),
@@ -27,17 +29,18 @@ class DetailsIngredients extends StatelessWidget {
   }
 }
 
-// here drag korar shomoy PizzaIngredientItem empty howar kaj baki
 class PizzaIngredientItem extends StatelessWidget {
   const PizzaIngredientItem(
       {Key? key,
+      required this.addIngred,
       required this.exist,
-      required this.onTap,
+      required this.removeIngredient,
       required this.ingredient})
       : super(key: key);
   final Ingredient ingredient;
   final bool exist;
-  final VoidCallback onTap;
+  final VoidCallback removeIngredient;
+  final Function(Ingredient ingred) addIngred;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -50,14 +53,12 @@ class PizzaIngredientItem extends StatelessWidget {
     );
   }
 
-  // here exist will work in reverse mode
   Widget _buildChild(BuildContext context) {
-    final bloc = Provider.of<PizzaBloc>(context, listen: false);
     return GestureDetector(
-      // to remove if exist
-      onTap: exist ? null : onTap,
-      // to add if not exit
-      onDoubleTap: () => exist ? null : bloc.addIngredient(ingredient),
+      // this both onTap & doubleTab works in reverse mode
+      // cz OnWillAccept acts different like exist=false==accept , exist=false==reject
+      onTap: exist ? null : removeIngredient,
+      onDoubleTap: () => exist ? addIngred(ingredient) : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 7),
         child: Container(
