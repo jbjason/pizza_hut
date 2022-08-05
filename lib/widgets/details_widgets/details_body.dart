@@ -7,7 +7,7 @@ import 'package:pizza_hut/widgets/details_widgets/details_price.dart';
 import 'package:pizza_hut/widgets/common_widgets/pizza_sized_button.dart';
 import 'package:provider/provider.dart';
 
-const _duration = Duration(milliseconds: 300);
+const _duration = Duration(milliseconds: 500);
 
 class DetailsBody extends StatefulWidget {
   const DetailsBody({Key? key, required this.pizza}) : super(key: key);
