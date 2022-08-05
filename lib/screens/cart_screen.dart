@@ -3,12 +3,12 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'dart:ui';
 import 'package:pizza_hut/provider/cart.dart';
-import 'package:pizza_hut/widgets/cart_widgets/cart_items.dart';
+import 'package:pizza_hut/widgets/cart_widgets/cart_items_list.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:provider/provider.dart';
 
 const _minSize = 60.0;
-const _duration = Duration(milliseconds: 800);
+const _duration = Duration(milliseconds: 600);
 const _imageRightMargin = 15.0;
 const _imageSmallSize = 45.0;
 const _imageMaxSize = 130.0;
@@ -46,11 +46,8 @@ class _CartScreenState extends State<CartScreen>
         right: 0,
         height: lerpDouble(_minSize, height, _controller.value),
         child: GestureDetector(
-          onTap: () {
-            _controller.isDismissed
-                ? _controller.forward(from: 0.0)
-                : _controller.reverse();
-          },
+          onTap: () =>
+              _controller.isDismissed ? _controller.forward(from: 0.0) : null,
           onVerticalDragUpdate: (dragDetail) {},
           child: _body(),
         ),
@@ -78,8 +75,8 @@ class _CartScreenState extends State<CartScreen>
             top: _cartTextTopPadding,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.all(10),
-              color: Colors.white24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              color: Colors.white12,
               child: Row(
                 children: [
                   const CounterCartButton(),
@@ -97,9 +94,12 @@ class _CartScreenState extends State<CartScreen>
             ),
           ),
           // Showing cartItems in Column at the end of animation
-          _controller.value == 1
-              ? CartItems(cartItems: cartItems, imageMaxSize: _imageMaxSize)
-              : const SizedBox.shrink(),
+          if (_controller.value == 1)
+            CartItemsList(
+              cartItems: cartItems,
+              onTap: _reverseAnimation,
+              imageMaxSize: _imageMaxSize,
+            )
         ],
       ),
     );
@@ -127,6 +127,7 @@ class _CartScreenState extends State<CartScreen>
         ),
       );
 
+  void _reverseAnimation() => _controller.reverse();
   double get _cartTextTopPadding => lerpDouble(7, 50, _controller.value)!;
 
   double get _cartItemContainer => lerpDouble(_imageSmallSize,
@@ -136,7 +137,7 @@ class _CartScreenState extends State<CartScreen>
       i * (_imageSmallSize + _imageRightMargin), 0, _controller.value)!;
 
   double _topPadding(int i) =>
-      lerpDouble(10, 100 + i * (20 + _imageMaxSize), _controller.value)!;
+      lerpDouble(10, 110 + i * (20 + _imageMaxSize), _controller.value)!;
 
   double get _imageSize =>
       lerpDouble(_imageSmallSize, _imageMaxSize, _controller.value)!;

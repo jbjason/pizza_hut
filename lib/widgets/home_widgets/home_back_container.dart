@@ -14,7 +14,7 @@ class HomeBackContainer extends StatelessWidget {
           top: size.height * .3,
           width: size.width * .6,
           left: size.width * .2,
-          bottom: 0,
+          bottom: 10,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: scaffoldColor,

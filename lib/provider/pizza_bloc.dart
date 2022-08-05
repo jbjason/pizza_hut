@@ -36,9 +36,9 @@ class PizzaBloc with ChangeNotifier {
   }
 
   bool isIngredientContains(Ingredient ingredient) {
-    // this loop works for onWillAccept*(dragTargetion)
-    // reverse condition for detailsDientsScreen
-    if (listIngredients.isEmpty) return true;
+    // 1. for onWillAccept*(dragTarget)  if item exist then return false cz this ingredient already has been added
+    // 2. but checking if item exist or not for ingredinet *GestureDetectorr(onTap), this method gives reverse result
+    // cz it return false if item already exist ,return true if not exist.
     for (Ingredient i in listIngredients) {
       if (i.image == ingredient.image) {
         return false;

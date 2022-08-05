@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/provider/cart.dart';
 import 'package:pizza_hut/widgets/home_widgets/cart_item_details.dart';
 
-class CartItems extends StatelessWidget {
-  const CartItems(
-      {Key? key, required this.cartItems, required this.imageMaxSize})
+class CartItemsList extends StatelessWidget {
+  const CartItemsList(
+      {Key? key,
+      required this.onTap,
+      required this.cartItems,
+      required this.imageMaxSize})
       : super(key: key);
   final List<CartItem> cartItems;
   final double imageMaxSize;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: 100),
+        SizedBox(
+          height: 100,
+          child: GestureDetector(
+            onTap: onTap,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: UnconstrainedBox(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  color: Colors.white54,
+                  child: const Icon(Icons.close_sharp,
+                      size: 30, color: buttonBackColor),
+                ),
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
@@ -44,7 +65,22 @@ class CartItems extends StatelessWidget {
             ),
           ),
         ),
-        //  Container(height: 100, color: Colors.amber),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          child: OutlinedButton(
+            onPressed: () {},
+            child: const Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                child: Text(
+                  'Confirm Order',
+                  style: TextStyle(color: buttonBackColor),
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

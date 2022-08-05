@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Positioned(
               left: width * .44,
-              bottom: 70,
+              bottom: 75,
               child: PizzaCartButton(onPress: () {}),
             ),
             const CartScreen(),
