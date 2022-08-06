@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/provider/cart.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
-import 'package:pizza_hut/screens/home_screen.dart';
+import 'package:pizza_hut/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         darkTheme: AppTheme.light(),
         themeMode: ThemeMode.light,
-        home: const HomeScreen(),
+        home: const WelcomeScreen(),
       ),
     );
   }

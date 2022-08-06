@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyClipper extends CustomClipper<Path> {
+class WelcomeClip extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Path path = Path()..moveTo(0, 0);
