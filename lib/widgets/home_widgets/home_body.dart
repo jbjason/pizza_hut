@@ -14,7 +14,7 @@ class _HomeBodyState extends State<HomeBody> {
   late PageController _controller;
   double _val = 0.0, _rotate = 0.0;
   double _scale = 0.0, _translateX = 0.0, _translateY = 0.0;
-
+  Pizza _pizza = pizzaList[0];
   @override
   void initState() {
     _controller = PageController(viewportFraction: .7);
@@ -38,7 +38,7 @@ class _HomeBodyState extends State<HomeBody> {
         // background White Container
         const HomeBackContainer(),
         // background Ingredint image
-        Positioned.fill(child: HomeBackIngredients(rotate: _rotate)),
+        Positioned.fill(child: HomeBackImages(pizza: _pizza, rotate: _rotate)),
         // Pizza List
         _pageView(),
       ],
@@ -50,7 +50,7 @@ class _HomeBodyState extends State<HomeBody> {
         physics: const ClampingScrollPhysics(),
         itemCount: pizzaList.length,
         itemBuilder: (context, index) {
-          final pizza = pizzaList[index];
+          _pizza = pizzaList[index];
           final percent = index - _val;
           _rotate = percent.abs().clamp(0, 1);
 
@@ -72,7 +72,7 @@ class _HomeBodyState extends State<HomeBody> {
             }
           }
           return HomePizzaDetails(
-            pizza: pizza,
+            pizza: _pizza,
             translateX: _translateX,
             translateY: _translateY,
             scale: _scale,

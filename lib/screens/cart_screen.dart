@@ -63,8 +63,6 @@ class _CartScreenState extends State<CartScreen>
         color: scaffoldColor,
         borderRadius: BorderRadius.vertical(
             top: Radius.circular(lerpDouble(40, 0, _controller.value)!)),
-        image: const DecorationImage(
-            image: AssetImage('assets/images/cover-3.png')),
       ),
       child: Stack(
         children: [

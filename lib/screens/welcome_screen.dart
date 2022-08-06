@@ -64,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: 30,
+                  right: 10,
                   bottom: 20,
                   child: GestureDetector(
                     onTap: () {
@@ -73,20 +73,27 @@ class WelcomeScreen extends StatelessWidget {
                     },
                     child: UnconstrainedBox(
                       child: Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: scaffoldColor,
-                                blurRadius: 50,
-                                spreadRadius: 10,
-                                offset: Offset(0, 5),
-                              )
-                            ]),
-                        child: const Icon(Icons.arrow_right_alt,
-                            size: 40, color: AppColors.iconDark),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: scaffoldColor,
+                              blurRadius: 50,
+                              spreadRadius: 10,
+                              offset: Offset(0, 5),
+                            )
+                          ],
+                        ),
+                        child: Row(
+                          children: const [
+                            Text('Continue'),
+                            Icon(Icons.arrow_right_alt,
+                                size: 40, color: AppColors.iconDark)
+                          ],
+                        ),
                       ),
                     ),
                   ),

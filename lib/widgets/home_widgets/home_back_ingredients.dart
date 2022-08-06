@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class HomeBackIngredients extends StatelessWidget {
-  const HomeBackIngredients({Key? key, required double rotate})
+import 'package:pizza_hut/models/pizza.dart';
+
+class HomeBackImages extends StatelessWidget {
+  const HomeBackImages({Key? key, required this.pizza, required double rotate})
       : _rotate = rotate,
         super(key: key);
   final double _rotate;
+  final Pizza pizza;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -35,7 +38,9 @@ class HomeBackIngredients extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Image.asset('assets/images/dish.png'),
+              child: Hero(
+                  tag: pizza.image + pizza.name,
+                  child: Image.asset('assets/images/dish.png')),
             ),
           ),
         ],

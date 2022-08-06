@@ -4,26 +4,32 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({Key? key}) : super(key: key);
-
+  const HomeAppBar({Key? key, required this.onTap}) : super(key: key);
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            'Order Manually',
-            style: GoogleFonts.benne(
-              textStyle: const TextStyle(
-                  fontSize: 23,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textDark),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(onPressed: onTap, icon: const Icon(Icons.menu_sharp)),
+              Text(
+                'Order Manually',
+                style: GoogleFonts.benne(
+                  textStyle: const TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textDark),
+                ),
+              ),
+            ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: const [
               Icon(Icons.location_on, color: textColor),
               SizedBox(width: 10),
