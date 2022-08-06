@@ -8,7 +8,6 @@ import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:provider/provider.dart';
 
 const _minSize = 60.0;
-const _duration = Duration(milliseconds: 600);
 const _imageRightMargin = 15.0;
 const _imageSmallSize = 45.0;
 const _imageMaxSize = 130.0;
@@ -25,7 +24,7 @@ class _CartScreenState extends State<CartScreen>
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this, duration: _duration);
+    _controller = AnimationController(vsync: this, duration: duration);
     super.initState();
   }
 

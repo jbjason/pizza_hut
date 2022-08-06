@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/screens/cart_screen.dart';
 import 'package:pizza_hut/screens/drawer_screen.dart';
 import 'package:pizza_hut/widgets/home_widgets/home_appbar.dart';
@@ -18,8 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 800));
+    _controller = AnimationController(vsync: this, duration: duration);
     super.initState();
   }
 

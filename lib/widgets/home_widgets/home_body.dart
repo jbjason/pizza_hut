@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/widgets/home_widgets/home_back_container.dart';
-import 'package:pizza_hut/widgets/home_widgets/home_back_ingredients.dart';
+import 'package:pizza_hut/widgets/home_widgets/home_back_images.dart';
 import 'package:pizza_hut/widgets/home_widgets/home_pizza_details.dart';
 
 class HomeBody extends StatefulWidget {
@@ -38,7 +38,7 @@ class _HomeBodyState extends State<HomeBody> {
         // background White Container
         const HomeBackContainer(),
         // background Ingredint image
-        Positioned.fill(child: HomeBackImages(pizza: _pizza, rotate: _rotate)),
+        Positioned.fill(child: HomeBackImages(rotate: _rotate)),
         // Pizza List
         _pageView(),
       ],

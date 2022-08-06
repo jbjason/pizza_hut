@@ -27,7 +27,7 @@ class DetailsImageDish extends StatefulWidget {
 class _DetailsImageDishState extends State<DetailsImageDish>
     with SingleTickerProviderStateMixin {
   late AnimationController _cartController;
-  late Animation<double> _pizzaScaleSAnim, _pizzaTransAnim;
+  late Animation<double> _pizzaScaleSAnim, _pizzaTransAnim, _pizzaHideAnim;
   late Animation<double> _boxOpenSAnim, _boxCloseAnim, _boxScaleMAnim;
   late Animation<double> _boxEndScale, _boxRotateZAnim, _boxHideAnim;
 
@@ -45,22 +45,24 @@ class _DetailsImageDishState extends State<DetailsImageDish>
   }
 
   void _buildCartAnimation() {
-    _pizzaScaleSAnim = Tween(begin: 1.0, end: 0.3).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.0, .3)));
-    _pizzaTransAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.3, .5));
-    _boxOpenSAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.25, .5));
+    _pizzaScaleSAnim = Tween(begin: 1.0, end: 0.4).animate(CurvedAnimation(
+        parent: _cartController, curve: const Interval(.0, .3)));
+    _pizzaTransAnim =
+        CurvedAnimation(parent: _cartController, curve: const Interval(.3, .4));
+    _boxOpenSAnim =
+        CurvedAnimation(parent: _cartController, curve: const Interval(.2, .4));
     _boxCloseAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.45, .6));
+        parent: _cartController, curve: const Interval(.35, .6));
+    _pizzaHideAnim =
+        CurvedAnimation(parent: _cartController, curve: const Interval(.4, .6));
     _boxScaleMAnim = Tween(begin: 1.0, end: 1.3).animate(CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.6, .7)));
-    _boxRotateZAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.8, .9));
+        parent: _cartController, curve: const Interval(.6, .7)));
+    _boxRotateZAnim =
+        CurvedAnimation(parent: _cartController, curve: const Interval(.8, .9));
     _boxEndScale = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.75, 1.0));
+        parent: _cartController, curve: const Interval(.75, 1.0));
     _boxHideAnim = CurvedAnimation(
-        parent: _cartController, curve: const Interval(0.75, 1.0));
+        parent: _cartController, curve: const Interval(.75, 1.0));
   }
 
   @override
@@ -70,50 +72,54 @@ class _DetailsImageDishState extends State<DetailsImageDish>
       animation: _cartController,
       builder: (context, _) {
         final boxCloseVal = lerpDouble(-45, -130, 1 - _boxCloseAnim.value)!;
-        return Hero(
-          tag: widget.pizza.image + widget.pizza.name,
-          child: Stack(
-            children: [
-              _boxBody(boxCloseVal),
-              Center(
-                child: Opacity(
-                  opacity: 1 - _pizzaTransAnim.value,
-                  child: Transform.scale(
-                    scale: _pizzaScaleSAnim.value,
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 15,
-                            spreadRadius: 3,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Image.asset('assets/images/dish.png'),
+        return Stack(
+          children: [
+            _boxBody(boxCloseVal),
+            Center(
+              child: Opacity(
+                opacity: 1 - _pizzaHideAnim.value,
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..translate(0.0, 10 * _pizzaTransAnim.value)
+                    ..scale(_pizzaScaleSAnim.value),
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 15,
+                          spreadRadius: 3,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
                     ),
+                    child: Hero(
+                        tag: 'dish.png',
+                        child: Image.asset('assets/images/dish.png')),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Opacity(
-                  opacity: 1 - _pizzaTransAnim.value,
-                  child: Center(
-                    child: Transform(
-                      alignment: Alignment.center,
-                      transform: Matrix4.identity()
-                        ..translate(0.0, 10 * _pizzaTransAnim.value)
-                        ..scale(_pizzaScaleSAnim.value),
-                      child: Image.asset(widget.pizza.image),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Opacity(
+                opacity: 1 - _pizzaHideAnim.value,
+                child: Center(
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()
+                      ..translate(0.0, 10 * _pizzaTransAnim.value)
+                      ..scale(_pizzaScaleSAnim.value),
+                    child: Hero(
+                        tag: widget.pizza.image + widget.pizza.name,
+                        child: Image.asset(widget.pizza.image)),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

@@ -8,7 +8,7 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: scaffoldColor,
+      color: scaffoldColor.withOpacity(0.5),
       child: Column(
         children: [
           const SizedBox(height: 60),
@@ -29,7 +29,7 @@ class DrawerScreen extends StatelessWidget {
                   // onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   //     builder: (_) => const Testing1Screen())),
                 ),
-                const Divider(color: buttonBackColor),
+                const Divider(color: AppColors.textDark),
                 const ListTile(
                   leading: Icon(Icons.shopping_cart_checkout_outlined,
                       color: AppColors.iconDark),

@@ -19,11 +19,11 @@ class CartItemsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
-          height: 100,
+          height: 110,
           child: GestureDetector(
             onTap: onTap,
             child: Align(
-              alignment: Alignment.bottomLeft,
+              alignment: const Alignment(-1, .5),
               child: UnconstrainedBox(
                 child: Container(
                   padding: const EdgeInsets.all(10),
@@ -66,13 +66,14 @@ class CartItemsList extends StatelessWidget {
           ),
         ),
         Container(
+          color: scaffoldColor,
           width: double.infinity,
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
           child: OutlinedButton(
             onPressed: () {},
             child: const Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                padding: EdgeInsets.all(15),
                 child: Text(
                   'Confirm Order',
                   style: TextStyle(color: buttonBackColor),
