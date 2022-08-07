@@ -21,7 +21,7 @@ class DetailsScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: scaffoldColor,
+        backgroundColor: scaffoldColor.withOpacity(0.5),
         appBar: _appBar(context),
         body: Stack(
           children: [

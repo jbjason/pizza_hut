@@ -8,7 +8,7 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: scaffoldColor.withOpacity(0.5),
+      color: scaffoldColor.withOpacity(0.3),
       child: Column(
         children: [
           const SizedBox(height: 60),
