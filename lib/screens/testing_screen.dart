@@ -122,9 +122,9 @@ class _MyClip extends CustomPainter {
     final rRect = RRect.fromRectAndRadius(
         // this center= centerPoint of the circle. radius means size ,30=means 30 pixels(x,y) in both direction
         //like circle-->30 height top&bottom from center, 30 width to left & rigth from center.
-        Rect.fromCircle(center: center, radius: radius),
+        Rect.fromCircle(center: center, radius: 80),
         // circular this value defines Rectangular's corner side borderRadius like Container's borderRadius
-        const Radius.circular(40));
+        const Radius.circular(80));
     canvas.drawRRect(rRect, paintBorders);
 
     // *Border Seperator
