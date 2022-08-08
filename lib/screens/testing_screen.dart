@@ -43,7 +43,7 @@ class _TestingScreenState extends State<TestingScreen>
                 painter: _MyClip(),
               ),
             ),
-            Container(height: 200, color: Colors.red),
+            const SizedBox(height: 200),
             Container(height: 200, color: Colors.blue),
           ],
         ),
@@ -122,9 +122,9 @@ class _MyClip extends CustomPainter {
     final rRect = RRect.fromRectAndRadius(
         // this center= centerPoint of the circle. radius means size ,30=means 30 pixels(x,y) in both direction
         //like circle-->30 height top&bottom from center, 30 width to left & rigth from center.
-        Rect.fromCircle(center: center, radius: 80),
+        Rect.fromCircle(center: center, radius: radius),
         // circular this value defines Rectangular's corner side borderRadius like Container's borderRadius
-        const Radius.circular(80));
+        const Radius.circular(40));
     canvas.drawRRect(rRect, paintBorders);
 
     // *Border Seperator
@@ -143,6 +143,23 @@ class _MyClip extends CustomPainter {
         Offset(closeOffsetStart, 0), Offset(closeOffsetEnd, 0), lines);
     canvas.drawLine(Offset(closeOffsetStart, height),
         Offset(closeOffsetEnd, height), lines);
+
+    // Border Caps (borders spearate points get Circular Starting)
+
+    final circle = Paint()
+      ..style = PaintingStyle.fill
+      ..color = AppColors.textDark
+      ..strokeWidth = height * .025;
+    final capRadius = height * .03;
+    canvas.drawCircle(Offset(0, closeOffsetStart), capRadius, circle);
+    canvas.drawCircle(Offset(0, closeOffsetEnd), capRadius, circle);
+    canvas.drawCircle(Offset(height, closeOffsetStart), capRadius, circle);
+    canvas.drawCircle(Offset(height, closeOffsetEnd), capRadius, circle);
+
+    canvas.drawCircle(Offset(closeOffsetStart, 0), capRadius, circle);
+    canvas.drawCircle(Offset(closeOffsetEnd, 0), capRadius, circle);
+    canvas.drawCircle(Offset(closeOffsetStart, height), capRadius, circle);
+    canvas.drawCircle(Offset(closeOffsetEnd, height), capRadius, circle);
   }
 
   @override
