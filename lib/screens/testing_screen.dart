@@ -237,27 +237,27 @@ class FaceController {
         ),
         faceToU1 = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.15, .3, curve: curv),
+          curve: const Interval(.2, .3, curve: curv),
         ),
         faceToL1 = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.25, .4, curve: curv),
+          curve: const Interval(.2, .4, curve: curv),
         ),
         faceToD1 = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.35, .5, curve: curv),
+          curve: const Interval(.33, .5, curve: curv),
         ),
         faceToM1 = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.45, .6, curve: curv),
+          curve: const Interval(.42, .6, curve: curv),
         ),
         borderToCircle = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.63, .7, curve: curv),
+          curve: const Interval(.6, .7, curve: curv),
         ),
         eyeBlinkS = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.725, .750, curve: curv),
+          curve: const Interval(.725, .75, curve: curv),
         ),
         eyeBlinkE = CurvedAnimation(
           parent: controller,
@@ -265,11 +265,11 @@ class FaceController {
         ),
         faceHide = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.8, .85, curve: curv),
+          curve: const Interval(.8, .825, curve: curv),
         ),
         checkAppear = CurvedAnimation(
           parent: controller,
-          curve: const Interval(.87, 1.0, curve: curv),
+          curve: const Interval(.85, 1.0, curve: curv),
         );
   TickerFuture startAnim() => controller.isDismissed
       ? controller.forward(from: 0.0)
