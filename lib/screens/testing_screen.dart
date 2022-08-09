@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'dart:math' as math;
-import 'package:vector_math/vector_math_64.dart' as vector;
+// ignore: depend_on_referenced_packages
+import 'package:vector_math/vector_math.dart' as vector;
 
 class TestingScreen extends StatefulWidget {
   const TestingScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _TestingScreenState extends State<TestingScreen>
     super.initState();
     _controller = FaceController(
       controller: AnimationController(
-          vsync: this, duration: const Duration(milliseconds: 4000)),
+          vsync: this, duration: const Duration(milliseconds: 3000)),
     );
   }
 
@@ -151,6 +152,11 @@ class _MyClip extends CustomPainter {
     canvas.drawPath(nosePth, paint);
 
     // *Borders
+    final borderPaint = Paint()
+      ..strokeWidth = strokeWidth
+      ..color = Colors.blue
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
     final center = Offset(oneHalf, oneHalf);
     final rRect = RRect.fromRectAndRadius(
         // this center= centerPoint of the circle. radius means size ,30=means 30 pixels(x,y) in both direction
@@ -158,7 +164,7 @@ class _MyClip extends CustomPainter {
         Rect.fromCircle(center: center, radius: radius),
         // circular this value defines Rectangular's corner side borderRadius like Container's borderRadius
         Radius.circular(borderToCircle));
-    canvas.drawRRect(rRect, paint);
+    canvas.drawRRect(rRect, borderPaint);
 
     // *Border Seperator
     final lines = Paint()
@@ -197,14 +203,14 @@ class _MyClip extends CustomPainter {
       ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
       ..strokeWidth = height * .025;
     canvas.drawLine(Offset(height * .275, oneHalf),
-        Offset(oneHalf, (oneHalf + 40) * checkAppear), checkL1);
+        Offset(oneHalf, oneHalf + (40 * checkAppear)), checkL1);
 
     final checkL2 = Paint()
       ..style = PaintingStyle.fill
       ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
       ..strokeWidth = height * .025;
     canvas.drawLine(Offset(oneHalf, oneHalf + 40),
-        Offset(height * .75, 50 * checkAppear), checkL2);
+        Offset(height * .75, oneHalf - (40 * checkAppear)), checkL2);
   }
 
   @override
