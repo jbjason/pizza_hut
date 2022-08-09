@@ -4,7 +4,6 @@ import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/models/pizza.dart';
 import 'package:pizza_hut/provider/pizza_bloc.dart';
-import 'package:pizza_hut/screens/home_screen.dart';
 import 'package:pizza_hut/widgets/common_widgets/counter_cart_button.dart';
 import 'package:pizza_hut/widgets/details_widgets/details_body.dart';
 import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
@@ -28,7 +27,7 @@ class DetailsScreen extends StatelessWidget {
       // so using default back button we go to animated details page again not to Home. to not to do dat this mathod
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.5),
+        backgroundColor: Colors.white.withOpacity(.95),
         appBar: _appBar(context),
         body: Stack(
           children: [
@@ -69,14 +68,7 @@ class DetailsScreen extends StatelessWidget {
                 const TextStyle(color: AppColors.textDark, fontSize: 24)),
       ),
       leading: IconButton(
-          onPressed: () {
-            isAnimate
-                ? Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => const HomeScreen()),
-                    (route) => false)
-                : Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
           icon:
               const Icon(Icons.arrow_back_ios_new, color: AppColors.iconDark)),
       actions: const [

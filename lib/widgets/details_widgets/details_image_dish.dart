@@ -98,7 +98,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
                       ],
                     ),
                     child: Hero(
-                        tag: 'dish.png',
+                        tag: 'dish.png${widget.tag}',
                         child: Image.asset('assets/images/dish.png')),
                   ),
                 ),
@@ -184,7 +184,7 @@ class _DetailsImageDishState extends State<DetailsImageDish>
       if (mounted) {
         Provider.of<Cart>(context, listen: false).addItem(widget.pizza);
         Future.delayed(const Duration(milliseconds: 500)).then((_) {
-          Navigator.of(context).push(MaterialPageRoute(
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (_) => DetailsScreen(
                   pizza: widget.pizza, isAnimate: true, tag: 'cart')));
         });

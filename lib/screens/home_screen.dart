@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(.95),
       body: AnimatedBuilder(
         animation: _controller,
         builder: (context, _) {
