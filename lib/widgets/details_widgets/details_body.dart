@@ -10,8 +10,10 @@ import 'package:provider/provider.dart';
 const _duration = Duration(milliseconds: 500);
 
 class DetailsBody extends StatefulWidget {
-  const DetailsBody({Key? key, required this.pizza}) : super(key: key);
+  const DetailsBody({Key? key, required this.tag, required this.pizza})
+      : super(key: key);
   final Pizza pizza;
+  final String tag;
   @override
   State<DetailsBody> createState() => _DetailsBodyState();
 }
@@ -105,6 +107,7 @@ class _DetailsBodyState extends State<DetailsBody>
                                   ? constrain.maxWidth * pizzaSize.factor - 20
                                   : constrain.maxWidth * pizzaSize.factor - 30,
                               child: DetailsImageDish(
+                                  tag: widget.tag,
                                   height: constrain.maxHeight,
                                   width: constrain.maxWidth,
                                   pizza: widget.pizza,

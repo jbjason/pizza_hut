@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:pizza_hut/provider/cart.dart';
+import 'package:pizza_hut/screens/success_screen.dart';
 import 'package:pizza_hut/widgets/home_widgets/cart_item_details.dart';
 
 class CartItemsList extends StatelessWidget {
@@ -68,9 +69,16 @@ class CartItemsList extends StatelessWidget {
         Container(
           color: scaffoldColor,
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      FadeTransition(
+                        opacity: animation,
+                        child: const SuccessScreen(),
+                      )));
+            },
             child: const Center(
               child: Padding(
                 padding: EdgeInsets.all(15),

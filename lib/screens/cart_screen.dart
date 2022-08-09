@@ -45,10 +45,10 @@ class _CartScreenState extends State<CartScreen>
         right: 0,
         height: lerpDouble(_minSize, height, _controller.value),
         child: GestureDetector(
-          onTap: () =>
-              _controller.isDismissed ? _controller.forward(from: 0.0) : null,
-          onVerticalDragUpdate: (dragDetail) {},
           child: _body(),
+          onTap: () {
+            _controller.isDismissed ? _controller.forward(from: 0.0) : null;
+          },
         ),
       ),
     );
@@ -111,11 +111,12 @@ class _CartScreenState extends State<CartScreen>
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: _imageSize,
                 height: _imageSize,
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage(pizza.image)),
+                child: Hero(
+                  tag: '${pizza.image}${pizza.name}cart',
+                  child: Image.asset(pizza.image),
                 ),
               ),
               const Spacer(),

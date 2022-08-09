@@ -33,6 +33,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
+                // pizza hut text
                 Positioned(
                   top: -30,
                   left: size.width / 7,
@@ -47,6 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                // description text
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -63,6 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                // continue button
                 Positioned(
                   right: 10,
                   bottom: 20,

@@ -15,10 +15,12 @@ class DetailsImageDish extends StatefulWidget {
       required this.height,
       required this.width,
       required this.pizza,
+      required this.tag,
       required this.isTrue})
       : super(key: key);
   final Pizza pizza;
   final bool isTrue;
+  final String tag;
   final double height, width;
   @override
   State<DetailsImageDish> createState() => _DetailsImageDishState();
@@ -113,8 +115,10 @@ class _DetailsImageDishState extends State<DetailsImageDish>
                       ..translate(0.0, 10 * _pizzaTransAnim.value)
                       ..scale(_pizzaScaleSAnim.value),
                     child: Hero(
-                        tag: widget.pizza.image + widget.pizza.name,
-                        child: Image.asset(widget.pizza.image)),
+                      tag:
+                          '${widget.pizza.image}${widget.pizza.name}${widget.tag}',
+                      child: Image.asset(widget.pizza.image),
+                    ),
                   ),
                 ),
               ),
@@ -181,8 +185,8 @@ class _DetailsImageDishState extends State<DetailsImageDish>
         Provider.of<Cart>(context, listen: false).addItem(widget.pizza);
         Future.delayed(const Duration(milliseconds: 500)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) =>
-                  DetailsScreen(pizza: widget.pizza, isAnimate: true)));
+              builder: (_) => DetailsScreen(
+                  pizza: widget.pizza, isAnimate: true, tag: 'cart')));
         });
       }
     }

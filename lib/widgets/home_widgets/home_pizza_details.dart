@@ -28,8 +28,8 @@ class HomePizzaDetails extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) =>
-                        DetailsScreen(pizza: pizza, isAnimate: false)));
+                    builder: (_) => DetailsScreen(
+                        pizza: pizza, isAnimate: false, tag: '')));
               },
               child: Transform.translate(
                 offset: Offset(translateX, translateY),

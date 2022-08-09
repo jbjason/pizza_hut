@@ -11,17 +11,24 @@ import 'package:pizza_hut/widgets/common_widgets/pizza_cart_button.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({Key? key, required this.isAnimate, required this.pizza})
+  const DetailsScreen(
+      {Key? key,
+      required this.tag,
+      required this.isAnimate,
+      required this.pizza})
       : super(key: key);
   final bool isAnimate;
   final Pizza pizza;
+  final String tag;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return WillPopScope(
+      // using this for when a item aaded in cart then we Navigate to this curren page(Animation remains forwarded only)
+      // so using default back button we go to animated details page again not to Home. to not to do dat this mathod
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: scaffoldColor.withOpacity(0.5),
+        backgroundColor: Colors.white.withOpacity(0.5),
         appBar: _appBar(context),
         body: Stack(
           children: [
@@ -30,10 +37,11 @@ class DetailsScreen extends StatelessWidget {
               left: 10,
               right: 10,
               child: Card(
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: DetailsBody(pizza: pizza)),
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: DetailsBody(pizza: pizza, tag: tag),
+              ),
             ),
             Positioned(
               bottom: 25,
