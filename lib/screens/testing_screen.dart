@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pizza_hut/constants/constants.dart';
 import 'dart:math' as math;
 import 'package:vector_math/vector_math_64.dart' as vector;
-import 'package:pizza_hut/constants/theme.dart';
 
 class TestingScreen extends StatefulWidget {
   const TestingScreen({Key? key}) : super(key: key);
@@ -40,10 +39,9 @@ class _TestingScreenState extends State<TestingScreen>
           children: [
             UnconstrainedBox(
               alignment: Alignment.center,
-              child: Container(
+              child: SizedBox(
                 height: 200,
                 width: 200,
-                color: Colors.grey[300],
                 child: CustomPaint(
                   size: const Size(200, 200),
                   painter: _MyClip(animation: _controller),
@@ -82,48 +80,52 @@ class _MyClip extends CustomPainter {
     final oneThird = height / 3;
     final twoThird = oneThird * 2;
     final strokeWidth = height * .06;
-    const canBlink = false;
+    final radius = math.min(oneHalf, oneHalf);
+    final eyeLength = height * .1;
+
+    // Animation Part
+    final faceToR1 = 20 * animation.faceToR1.value;
+    final faceToU1 = animation.faceToU1.value;
+    final faceToL1 = animation.faceToL1.value;
+    final faceToD1 = animation.faceToD1.value;
+    final faceToM1 = animation.faceToM1.value;
+    final faceToRX = faceToR1;
+    final faceToUX = faceToU1 > 0 ? -faceToRX * faceToU1 : 0;
+    final faceToUY = -15 * faceToU1;
+    final faceToLX = -20 * faceToL1; // x = -20
+    final faceToLY = 30 * faceToL1; // y = +10
+    final faceToDX = 15 * faceToD1; // x = -5
+    final faceToDY = 5 * faceToD1; // y = 15
+    final faceToMX = 5 * faceToM1; // x = 0
+    final faceToMY = -15 * faceToM1; // y =0
+    final faceX = faceToRX + faceToUX + faceToLX + faceToDX + faceToMX;
+    final faceY = faceToUY + faceToLY + faceToDY + faceToMY;
+    final borderToCircle = 40 + 80 * animation.borderToCircle.value;
+    final blinkStart = (eyeLength / 2 * animation.eyeBlinkS.value);
+    final blinkEnd = (eyeLength / 2 * animation.eyeBlinkE.value);
+    final faceHide = animation.faceHide.value;
+    final checkAppear = animation.checkAppear.value;
     final paint = Paint()
       ..strokeWidth = strokeWidth
-      ..color = Colors.blue
+      ..color = faceHide > 0 ? Colors.transparent : Colors.blue
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    // Animation Part
-    final eyeToR1 = 20 * animation.faceToR1.value;
-    final eyeToU1 = animation.faceToU1.value;
-    final eyeToL1 = animation.faceToL1.value;
-    final eyeToD1 = animation.faceToD1.value;
-    final eyeToM1 = animation.faceToM1.value;
-
-    final radius = math.min(oneHalf, oneHalf);
-    final faceToRX = eyeToR1;
-    final faceToUX = eyeToU1 > 0 ? -faceToRX * eyeToU1 : 0;
-    final faceToUY = -15 * eyeToU1;
-    final faceToLX = -20 * eyeToL1; // x = -20
-    final faceToLY = 30 * eyeToL1; // y = +10
-    final faceToDX = 15 * eyeToD1; // x = -5
-    final faceToDY = 5 * eyeToD1; // y = 15
-    final faceToMX = 5 * eyeToM1; // x = 0
-    final faceToMY = -15 * eyeToM1; // y =0
-    final faceX = faceToRX + faceToUX + faceToLX + faceToDX + faceToMX;
-    final faceY = faceToUY + faceToLY + faceToDY + faceToMY;
-
     // *Eyes
-    final eyeLength = height * .1;
-
-    final leftfaceX = Offset(oneThird + faceX, oneThird + faceY);
-    final leftfaceY = Offset(oneThird + faceX, oneThird + eyeLength + faceY);
-    canvas.drawLine(leftfaceX, leftfaceY, paint);
-    final rightfaceX = Offset(twoThird + faceX, oneThird + faceY);
-    final rightfaceY = Offset(twoThird + faceX, oneThird + eyeLength + faceY);
-    canvas.drawLine(rightfaceX, rightfaceY, paint);
+    final leftEyeX = Offset(oneThird + faceX, oneThird + faceY);
+    final leftEyeY = Offset(oneThird + faceX, oneThird + eyeLength + faceY);
+    canvas.drawLine(leftEyeX, leftEyeY, paint);
+    final rightEyeX =
+        Offset(twoThird + faceX, oneThird + faceY + blinkStart - blinkEnd);
+    final rightEyeY = Offset(
+        twoThird + faceX, oneThird + eyeLength + faceY - blinkStart + blinkEnd);
+    canvas.drawLine(rightEyeX, rightEyeY, paint);
 
     // *Smile
-    final smileWidthR = eyeToU1 > 0 ? -faceToRX * eyeToU1 : 0;
-    final smileWidthL = eyeToL1 > 0 ? -faceToRX * eyeToL1 : 0;
-    final smileWidthD = eyeToD1 > 0 ? faceToRX * eyeToD1 : 0;
-    final smileWidthAnim = faceToRX + smileWidthR + smileWidthL + smileWidthD;
+    final smileWidthR = -faceToR1 * faceToU1;
+    final smileWidthL = (faceToR1 + 15) * faceToL1;
+    final smileWidthD = -(faceToR1 + 15) * faceToD1;
+    final smileWidthAnim = faceToR1 + smileWidthR + smileWidthL + smileWidthD;
     final smileCenter = Offset(oneHalf + faceX, oneHalf + faceY);
     final rect = Rect.fromCircle(center: smileCenter, radius: height * .225);
     // as value increases like 150 then smile moving to more right of the *circle. for 100 it moves toward more to left of the *circle
@@ -149,24 +151,19 @@ class _MyClip extends CustomPainter {
     canvas.drawPath(nosePth, paint);
 
     // *Borders
-    final paintBorders = Paint()
-      ..style = PaintingStyle.stroke
-      ..color = AppColors.textDark
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round;
     final center = Offset(oneHalf, oneHalf);
     final rRect = RRect.fromRectAndRadius(
         // this center= centerPoint of the circle. radius means size ,30=means 30 pixels(x,y) in both direction
         //like circle-->30 height top&bottom from center, 30 width to left & rigth from center.
         Rect.fromCircle(center: center, radius: radius),
         // circular this value defines Rectangular's corner side borderRadius like Container's borderRadius
-        const Radius.circular(40));
-    canvas.drawRRect(rRect, paintBorders);
+        Radius.circular(borderToCircle));
+    canvas.drawRRect(rRect, paint);
 
     // *Border Seperator
     final lines = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.white
+      ..color = borderToCircle > 40 ? Colors.transparent : Colors.white
       ..strokeWidth = height * .07;
     final closeOffsetStart = oneThird * (1 + 0);
     final closeOffsetEnd = oneThird * (2 - 0);
@@ -182,32 +179,32 @@ class _MyClip extends CustomPainter {
     // *order Caps (borders spearate points get Circular Starting)
     final circle = Paint()
       ..style = PaintingStyle.fill
-      ..color = AppColors.textDark
+      ..color = borderToCircle > 40 ? Colors.transparent : Colors.blue
       ..strokeWidth = height * .025;
     final capRadius = height * .03;
     canvas.drawCircle(Offset(0, closeOffsetStart), capRadius, circle);
     canvas.drawCircle(Offset(0, closeOffsetEnd), capRadius, circle);
     canvas.drawCircle(Offset(height, closeOffsetStart), capRadius, circle);
     canvas.drawCircle(Offset(height, closeOffsetEnd), capRadius, circle);
-
     canvas.drawCircle(Offset(closeOffsetStart, 0), capRadius, circle);
     canvas.drawCircle(Offset(closeOffsetEnd, 0), capRadius, circle);
     canvas.drawCircle(Offset(closeOffsetStart, height), capRadius, circle);
     canvas.drawCircle(Offset(closeOffsetEnd, height), capRadius, circle);
 
     // *Check Sign
-    // final checkL1 = Paint()
-    //   ..style = PaintingStyle.fill
-    //   ..color = AppColors.textDark
-    //   ..strokeWidth = height * .025;
-    // canvas.drawLine(
-    //     Offset(height * .275, oneHalf), const Offset(0, 0), checkL1);
+    final checkL1 = Paint()
+      ..style = PaintingStyle.fill
+      ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
+      ..strokeWidth = height * .025;
+    canvas.drawLine(Offset(height * .275, oneHalf),
+        Offset(oneHalf, (oneHalf + 40) * checkAppear), checkL1);
 
-    // final checkL2 = Paint()
-    //   ..style = PaintingStyle.fill
-    //   ..color = AppColors.textDark
-    //   ..strokeWidth = height * .025;
-    // canvas.drawLine(Offset(oneHalf, height * .7), const Offset(0, 0), checkL2);
+    final checkL2 = Paint()
+      ..style = PaintingStyle.fill
+      ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
+      ..strokeWidth = height * .025;
+    canvas.drawLine(Offset(oneHalf, oneHalf + 40),
+        Offset(height * .75, 50 * checkAppear), checkL2);
   }
 
   @override
