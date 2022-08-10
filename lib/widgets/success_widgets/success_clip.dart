@@ -134,7 +134,7 @@ class SuccessClip extends CustomPainter {
     final checkL1 = Paint()
       ..style = PaintingStyle.fill
       ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
-      ..strokeWidth = height * .025;
+      ..strokeWidth = strokeWidth;
     canvas.drawLine(
         Offset(oneHalf * .6, oneHalf),
         Offset(oneHalf * .6 + (oneHalf * .35) * checkAppear,
@@ -144,7 +144,7 @@ class SuccessClip extends CustomPainter {
     final checkL2 = Paint()
       ..style = PaintingStyle.fill
       ..color = checkAppear > 0 ? Colors.blue : Colors.transparent
-      ..strokeWidth = height * .025;
+      ..strokeWidth = strokeWidth;
     canvas.drawLine(
         Offset(oneHalf * .925, oneHalf + 40),
         Offset(oneHalf + (height * .25) * checkAppear,

@@ -21,7 +21,7 @@ class _SuccessScreenState extends State<SuccessScreen>
     super.initState();
     _controller = FaceController(
       controller: AnimationController(
-          vsync: this, duration: const Duration(milliseconds: 3000)),
+          vsync: this, duration: const Duration(milliseconds: 4000)),
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(milliseconds: 500))
