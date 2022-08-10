@@ -9,16 +9,13 @@ class WelcomeTextButton extends StatelessWidget {
   const WelcomeTextButton({
     Key? key,
     required this.size,
-    required Animation<double> titleMoveIn,
     required Animation<Color?> titleColorAnim,
     required Animation<double> buttonTextMoveIn,
-  })  : _titleMoveIn = titleMoveIn,
-        _titleColorAnim = titleColorAnim,
+  })  : _titleColorAnim = titleColorAnim,
         _buttonTextMoveIn = buttonTextMoveIn,
         super(key: key);
 
   final Size size;
-  final Animation<double> _titleMoveIn;
   final Animation<Color?> _titleColorAnim;
   final Animation<double> _buttonTextMoveIn;
 
@@ -39,7 +36,7 @@ class WelcomeTextButton extends StatelessWidget {
 
   Widget _pizzaText() => Positioned(
         top: -30,
-        left: lerpDouble(-300, size.width / 7, _titleMoveIn.value),
+        left: lerpDouble(-300, size.width / 7, _buttonTextMoveIn.value),
         child: Text(
           'Pizza Hut !',
           style: GoogleFonts.abrilFatface(
@@ -54,7 +51,7 @@ class WelcomeTextButton extends StatelessWidget {
   Widget _descriptionText() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: Transform.translate(
-          offset: Offset(0, size.height * .4 * (1 - _buttonTextMoveIn.value)),
+          offset: Offset(0, size.height * .6 * (1 - _buttonTextMoveIn.value)),
           child: Column(
             children: [
               const SizedBox(height: 50),
@@ -74,8 +71,8 @@ class WelcomeTextButton extends StatelessWidget {
         ),
       );
   Widget _continueButton(BuildContext context) => Positioned(
-        right: 10,
-        bottom: lerpDouble(-100, 20, _buttonTextMoveIn.value),
+        right: lerpDouble(-200, 10, _buttonTextMoveIn.value),
+        bottom: 20,
         child: GestureDetector(
           onTap: () {
             Navigator.of(context)

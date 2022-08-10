@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:pizza_hut/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_hut/constants/theme.dart';
 import 'package:pizza_hut/widgets/welcome_widgets/welcome_clips.dart';
 import 'package:pizza_hut/widgets/welcome_widgets/welcome_text_button.dart';
 
@@ -15,13 +16,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   late AnimationController _controller;
   late Animation<double> _logoScale, _logoMoveU;
   late Animation<double> _imageMoveIn, _imageMoveU;
-  late Animation<double> _titleMoveIn, _buttonTextMoveIn;
+  late Animation<double> _buttonTextMoveIn;
   late Animation<Color?> _titleColorAnim;
 
   @override
   void initState() {
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 4));
+        AnimationController(vsync: this, duration: const Duration(seconds: 6));
     _setAnimation();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(duration).then((value) => _controller.forward(from: 0.0));
@@ -30,22 +31,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   void _setAnimation() {
-    _logoScale = Tween<double>(begin: 30, end: 1).animate(CurvedAnimation(
+    _logoScale = Tween<double>(begin: 20, end: 1).animate(CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.0, .3, curve: Curves.easeIn)));
+        curve: const Interval(.0, .2, curve: Curves.easeIn)));
     _logoMoveU =
-        CurvedAnimation(parent: _controller, curve: const Interval(.3, .4));
-    _imageMoveIn =
-        CurvedAnimation(parent: _controller, curve: const Interval(.4, .5));
-    _titleMoveIn = CurvedAnimation(
+        CurvedAnimation(parent: _controller, curve: const Interval(.2, .4));
+    _imageMoveIn = CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.6, .7, curve: Curves.bounceIn));
+        curve: const Interval(.3, .5, curve: Curves.fastOutSlowIn));
     _buttonTextMoveIn = CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.7, .8, curve: Curves.bounceIn));
-    _imageMoveU =
-        CurvedAnimation(parent: _controller, curve: const Interval(.8, 1.0));
-    _titleColorAnim = ColorTween(begin: Colors.white, end: Colors.grey[800])
+        curve: const Interval(.6, .7, curve: Curves.bounceIn));
+    _imageMoveU = CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(.8, 1.0, curve: Curves.decelerate));
+    _titleColorAnim = ColorTween(begin: Colors.white, end: AppColors.textDark)
         .animate(CurvedAnimation(
             parent: _controller,
             curve: const Interval(.9, 1.0, curve: Curves.decelerate)));
@@ -65,13 +65,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             _logoImage(size),
             // Title Descrip Button
             Positioned(
-              top: size.height * .75,
+              top: lerpDouble(
+                  size.height * .4, size.height * .75, _imageMoveU.value),
               left: 0,
               right: 0,
-              bottom: 0,
+              bottom: lerpDouble(size.height * .3, 0, _imageMoveU.value),
               child: WelcomeTextButton(
                 size: size,
-                titleMoveIn: _titleMoveIn,
                 titleColorAnim: _titleColorAnim,
                 buttonTextMoveIn: _buttonTextMoveIn,
               ),
@@ -87,8 +87,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       top: lerpDouble(size.height, 0, _imageMoveIn.value),
       left: 0,
       right: 0,
-      height:
-          lerpDouble(size.height + 70, size.height * .75, _imageMoveU.value),
+      height: lerpDouble(
+          size.height + size.height * .4, size.height * .7, _imageMoveU.value),
       child: ClipPath(
         clipper: WelcomeClip(),
         child: Container(
