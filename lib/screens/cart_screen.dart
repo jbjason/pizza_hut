@@ -135,7 +135,7 @@ class _CartScreenState extends State<CartScreen>
       i * (_imageSmallSize + _imageRightMargin), 0, _controller.value)!;
 
   double _topPadding(int i) =>
-      lerpDouble(10, 110 + i * (20 + _imageMaxSize), _controller.value)!;
+      lerpDouble(10, 120 + i * (20 + _imageMaxSize), _controller.value)!;
 
   double get _imageSize =>
       lerpDouble(_imageSmallSize, _imageMaxSize, _controller.value)!;

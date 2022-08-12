@@ -22,13 +22,6 @@ class _HomeBodyState extends State<HomeBody> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _controller.removeListener(_listener);
-    _controller.dispose();
-    super.dispose();
-  }
-
   void _listener() => setState(() => _val = _controller.page!);
 
   @override
@@ -80,4 +73,11 @@ class _HomeBodyState extends State<HomeBody> {
           );
         },
       );
+
+  @override
+  void dispose() {
+    _controller.removeListener(_listener);
+    _controller.dispose();
+    super.dispose();
+  }
 }

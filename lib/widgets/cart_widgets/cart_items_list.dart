@@ -20,7 +20,7 @@ class CartItemsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(
-          height: 110,
+          height: 120,
           child: GestureDetector(
             onTap: onTap,
             child: Align(
