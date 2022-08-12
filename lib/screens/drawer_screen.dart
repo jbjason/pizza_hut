@@ -26,8 +26,6 @@ class DrawerScreen extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: AppColors.textDark),
                   ),
-                  // onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (_) => const Testing1Screen())),
                 ),
                 const Divider(color: AppColors.textDark),
                 const ListTile(
@@ -38,8 +36,6 @@ class DrawerScreen extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: AppColors.textDark),
                   ),
-                  // onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (_) => const Testing1Screen())),
                 ),
                 const Spacer(),
                 GestureDetector(

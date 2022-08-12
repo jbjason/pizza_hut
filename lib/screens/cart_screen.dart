@@ -126,7 +126,7 @@ class _CartScreenState extends State<CartScreen>
       );
 
   void _reverseAnimation() => _controller.reverse();
-  double get _cartTextTopPadding => lerpDouble(7, 50, _controller.value)!;
+  double get _cartTextTopPadding => lerpDouble(7, 40, _controller.value)!;
 
   double get _cartItemContainer => lerpDouble(_imageSmallSize,
       MediaQuery.of(context).size.width * .95, _controller.value)!;

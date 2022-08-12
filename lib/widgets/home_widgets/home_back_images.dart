@@ -14,7 +14,7 @@ class HomeBackImages extends StatelessWidget {
           Positioned(
             left: 0,
             child: Transform.rotate(
-                angle: math.pi / 2 * (1 - _rotate),
+                angle: (math.pi) * (1 - _rotate),
                 child: Image.asset('assets/images/back1.png')),
           ),
           // dish Image

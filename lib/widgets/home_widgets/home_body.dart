@@ -52,7 +52,7 @@ class _HomeBodyState extends State<HomeBody> {
         itemBuilder: (context, index) {
           _pizza = pizzaList[index];
           final percent = index - _val;
-          _rotate = percent.abs().clamp(0, 1);
+          _rotate = percent.clamp(0, 1);
 
           if (_controller.position.haveDimensions) {
             _scale = percent.clamp(-.5, .5).abs();
