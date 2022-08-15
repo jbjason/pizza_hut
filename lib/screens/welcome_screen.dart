@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 6));
+        AnimationController(vsync: this, duration: const Duration(seconds: 5));
     _setAnimation();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(duration).then((value) => _controller.forward(from: 0.0));
@@ -33,22 +33,23 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void _setAnimation() {
     _logoScale = Tween<double>(begin: 20, end: 1).animate(CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.0, .2, curve: Curves.easeIn)));
-    _logoMoveU =
-        CurvedAnimation(parent: _controller, curve: const Interval(.2, .4));
+        curve: const Interval(.0, .1, curve: Curves.easeIn)));
+    _logoMoveU = CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(.1, .2, curve: Curves.slowMiddle));
     _imageMoveIn = CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.3, .5, curve: Curves.fastOutSlowIn));
+        curve: const Interval(.2, .4, curve: Curves.slowMiddle));
     _buttonTextMoveIn = CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.6, .7, curve: Curves.bounceIn));
+        curve: const Interval(.4, .7, curve: Curves.bounceIn));
     _imageMoveU = CurvedAnimation(
         parent: _controller,
-        curve: const Interval(.8, 1.0, curve: Curves.decelerate));
+        curve: const Interval(.7, 1.0, curve: Curves.decelerate));
     _titleColorAnim = ColorTween(begin: Colors.white, end: AppColors.textDark)
         .animate(CurvedAnimation(
             parent: _controller,
-            curve: const Interval(.9, 1.0, curve: Curves.decelerate)));
+            curve: const Interval(.85, 1.0, curve: Curves.decelerate)));
   }
 
   @override

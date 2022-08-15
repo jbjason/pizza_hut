@@ -71,34 +71,36 @@ class WelcomeTextButton extends StatelessWidget {
         ),
       );
   Widget _continueButton(BuildContext context) => Positioned(
-        right: lerpDouble(-200, 10, _buttonTextMoveIn.value),
+        right: 10,
         bottom: 20,
         child: GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => const HomeScreen()));
-          },
-          child: UnconstrainedBox(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: scaffoldColor,
-                    blurRadius: 50,
-                    spreadRadius: 10,
-                    offset: Offset(0, 5),
-                  )
-                ],
-              ),
-              child: Row(
-                children: const [
-                  Text('Continue'),
-                  Icon(Icons.arrow_right_alt,
-                      size: 40, color: AppColors.iconDark)
-                ],
+          onTap: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => const HomeScreen())),
+          child: Transform.scale(
+            scale: _buttonTextMoveIn.value,
+            child: UnconstrainedBox(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: scaffoldColor,
+                      blurRadius: 50,
+                      spreadRadius: 10,
+                      offset: Offset(0, 5),
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: const [
+                    Text('Continue'),
+                    Icon(Icons.arrow_right_alt,
+                        size: 40, color: AppColors.iconDark)
+                  ],
+                ),
               ),
             ),
           ),
