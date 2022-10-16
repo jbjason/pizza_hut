@@ -12,10 +12,12 @@ class HomeBackImages extends StatelessWidget {
       builder: (context, constraints) => Stack(
         children: [
           Positioned(
-            left: 20,
+            left: 50,
             child: Transform.rotate(
-                angle: math.pi * (1 - _rotate),
-                child: Image.asset('assets/images/back1.png')),
+              angle: math.pi * (1 - _rotate),
+              child: Image.asset('assets/images/back1.png',
+                  height: 380, fit: BoxFit.contain),
+            ),
           ),
           // dish Image
           Positioned(
