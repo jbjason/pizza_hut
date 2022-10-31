@@ -10,6 +10,7 @@ class HomeBackImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Stack(
+        clipBehavior: Clip.none,
         children: [
           Positioned(
             left: 20,

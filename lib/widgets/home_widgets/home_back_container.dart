@@ -7,34 +7,29 @@ class HomeBackContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        // background COntainer
-        Positioned(
-          top: size.height * .3,
-          width: size.width * .6,
-          left: size.width * .2,
-          bottom: 10,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: scaffoldColor,
-              borderRadius: BorderRadius.vertical(
-                  bottom: Radius.elliptical(size.width * .3, size.height * .2)),
-              gradient: LinearGradient(
-                  colors: [Colors.white.withOpacity(0.3), scaffoldColor],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter),
-              boxShadow: const [
-                BoxShadow(
-                    offset: Offset(0, 2),
-                    color: Colors.black12,
-                    spreadRadius: 10,
-                    blurRadius: 80)
-              ],
-            ),
-          ),
+    return Positioned(
+      top: size.height * .3,
+      width: size.width * .6,
+      left: size.width * .2,
+      bottom: 10,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: scaffoldColor,
+          borderRadius: BorderRadius.vertical(
+              bottom: Radius.elliptical(size.width * .3, size.height * .2)),
+          gradient: LinearGradient(
+              colors: [Colors.white.withOpacity(0.3), scaffoldColor],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
+          boxShadow: const [
+            BoxShadow(
+                offset: Offset(0, 2),
+                color: Colors.black12,
+                spreadRadius: 10,
+                blurRadius: 80)
+          ],
         ),
-      ],
+      ),
     );
   }
 }
