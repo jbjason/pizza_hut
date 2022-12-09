@@ -1,5 +1,4 @@
 # Pizza_Hut
-demo: https://www.loom.com/share/d4e7e01c9fb0471893e1748f4b3229cc
 
 <img width=30% height=14% src="https://user-images.githubusercontent.com/62088928/199106985-d0122db8-7dbf-43f6-82a7-3a0c55683a82.jpg">   <img width=30% height=14% src="https://user-images.githubusercontent.com/62088928/199107059-20433659-66b1-489b-950a-e2479c5668f5.jpg">
 
@@ -8,4 +7,4 @@ demo: https://www.loom.com/share/d4e7e01c9fb0471893e1748f4b3229cc
 <img width=30% height=14% src="https://user-images.githubusercontent.com/62088928/199107948-88afb700-4939-450b-b762-fe528a6c4662.jpg">  <img width=30% height=14% src="https://user-images.githubusercontent.com/62088928/199107805-26ede750-96ca-4634-b339-48f9238ae616.jpg">
 
 
- 
+ demo: https://www.loom.com/share/d4e7e01c9fb0471893e1748f4b3229cc
